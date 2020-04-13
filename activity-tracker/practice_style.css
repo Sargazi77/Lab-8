@@ -6,13 +6,14 @@
     padding-top: 10px;
 }
 
-.type1 {
-    background: yellow;
+.type-sketching{
+    color: rgb(70, 138, 57);
 }
-.type2 {
-    background: red;
+.type-painting{
+    color: red;
 }
-.type3 {
-    background: blue;
+.type-drawing{
+    color: blue;
 }
+
 
