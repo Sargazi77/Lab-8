@@ -47,7 +47,7 @@
                         <!-- TODO create a select. v-model type -->
                         <select class="form-control" v-model="type">
                             <!-- TODO create one option for each type  -->
-                            <option v-for="type in types" v-bind:value= "type" v-bind:class="{type1: type.checked, type2: type.chose , type3: type.need}"> {{ type.lable }}</option>
+                            <option v-for="type in types" v-bind:value= "type"> {{ type }}</option>
                         </select>
                         
                         </select>
@@ -104,10 +104,10 @@
                             <th> Note </th>
                         </tr>
                         <!-- TODO display one table row for each activityRecord  -->
-                        <tr v-for="record in activityRecords">
+                        <tr v-for="record in activityRecords" v-bind:class="'type-' + record.type ">
                             <td> {{ record.when | shortDateFormat }}</td>
                             <td> {{ record.howLong | fixed }}</td>
-                            <td> {{ record.type.lable }}</td>
+                            <td> {{ record.type }}</td>
                             <td> {{ record.digitalTraditional }}</td>
                             <td> {{ record.completedNotCom }}</td>
                             <td> {{ record.notes | readMore(40, '...') }} </td>
@@ -123,12 +123,12 @@
 
             <div class="card-body">
                 <!-- TODO use computed property to display total hours -->
-                <p>You have practiced a total of {{ totalHours }} hours, broken down as follows:</p>
+                <p>You have practiced a total of {{ totalHours | fixed }} hours, broken down as follows:</p>
                 
                 <!-- TODO computed property to display total for each type  -->
-                <p>TODO total for each type</p>
+                <p></p>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group=item" v-for="hours ,type in totalHoursByType">{{ type }}: {{ hours }}</li>
+                    <li class="list-group=item" v-for="hours ,type in totalHoursByType">{{ type }}: {{ totalHoursByType[type] | fixed }}</li>
                 </ul>
                 
             </div>
@@ -148,26 +148,7 @@
               type: 'sketching',
               digitalTraditional: 'traditional',
               activityRecords:[],
-              types: [ 
-                  {
-                    lable: 'sketching',
-                    checked: true,
-                    chose: false,
-                    need:false,
-                  },
-                  {
-                    lable: 'painting',
-                    checked: false,
-                    chose: true,
-                    need:false,
-                  },
-                  {
-                    lable: 'drawing',
-                    checked: false,
-                    chose: false,
-                    need: true,
-                  },
-              ],
+              types: [ 'sketching','drawing', 'painting'],
               digital: 'digital',
               traditional: 'traditional',
               completedNotCom: 'No',
